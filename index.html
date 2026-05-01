@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ETI UT 2 Quiz App</title>
+    <link rel="icon" type="image/png" href="assets/logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Sora:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body data-theme="light">
+    <div class="background-orb orb-one"></div>
+    <div class="background-orb orb-two"></div>
+    <div class="background-grid"></div>
+
+    <div class="app-shell">
+        <header class="topbar glass-card">
+            <div>
+                <p class="eyebrow">ETI UT 2</p>
+                <h1>ETI MCQ Quiz App</h1>
+            </div>
+            <div class="topbar-actions">
+                <button id="themeToggle" class="ghost-button" type="button" aria-label="Toggle theme">
+          <span id="themeIcon">🌙</span>
+          <span id="themeLabel">Dark mode</span>
+        </button>
+            </div>
+        </header>
+
+        <main>
+            <section id="homeScreen" class="screen active">
+                <div class="hero glass-card">
+                    <div class="hero-copy">
+                        <p class="eyebrow">Responsive Web App</p>
+                        <h2>Revise faster, practice smarter, and track weak topics before the exam.</h2>
+                        <p class="hero-text">
+                            Exam-style quiz mode, topic-wise practice, animated analytics, saved attempts, and retry-wrong flow powered by your ETI question bank.
+                        </p>
+                        <div class="hero-actions">
+                            <button id="startQuizBtn" class="primary-button" type="button">Start Quiz</button>
+                            <button id="practiceModeBtn" class="secondary-button" type="button">Practice Mode</button>
+                            <button id="viewScoreBtn" class="ghost-button" type="button">View Score</button>
+                        </div>
+                    </div>
+                    <div class="hero-panel">
+                        <div class="metric-card">
+                            <span>Question Bank</span>
+                            <strong id="homeQuestionCount">120 MCQs</strong>
+                        </div>
+                        <div class="metric-card">
+                            <span>Topics Covered</span>
+                            <strong id="homeTopicCount">ETI Topics</strong>
+                        </div>
+                        <div class="metric-card">
+                            <span>Latest Score</span>
+                            <strong id="latestScoreSummary">No attempt yet</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="home-grid">
+                    <article class="glass-card feature-card">
+                        <h3>Exam Simulation</h3>
+                        <p>Attempt a full 120-question timed test with question navigation and final submission.</p>
+                    </article>
+                    <article class="glass-card feature-card">
+                        <h3>Topic Practice</h3>
+                        <p>Study quality, ERP, marketing, SCM, HRM, leadership, and more with instant feedback and explanations.</p>
+                    </article>
+                    <article class="glass-card feature-card">
+                        <h3>Smart Review</h3>
+                        <p>Replay only wrong questions, store scores in the browser, and surface weak areas automatically.</p>
+                    </article>
+                </div>
+            </section>
+
+            <section id="quizScreen" class="screen">
+                <div class="glass-card screen-header">
+                    <div>
+                        <p class="eyebrow">Quiz Mode</p>
+                        <h2>Exam Simulation</h2>
+                    </div>
+                    <div class="header-meta">
+                        <div class="pill">
+                            <span>Question</span>
+                            <strong id="quizProgressText">1 / 60</strong>
+                        </div>
+                        <div class="pill warning">
+                            <span>Time Left</span>
+                            <strong id="timerDisplay">45:00</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass-card progress-card">
+                    <div class="progress-meta">
+                        <span>Completion</span>
+                        <span id="quizAnsweredCount">0 answered</span>
+                    </div>
+                    <div class="progress-track">
+                        <div id="quizProgressBar" class="progress-fill"></div>
+                    </div>
+                </div>
+
+                <div class="quiz-layout">
+                    <article class="glass-card question-card" id="quizQuestionCard">
+                        <div class="question-header">
+                            <span id="quizTopicBadge" class="topic-badge">ERP</span>
+                            <span class="question-counter">Serial order</span>
+                        </div>
+                        <h3 id="quizQuestionText">Question text</h3>
+                        <div id="quizOptions" class="options-grid"></div>
+                        <div class="nav-row question-actions">
+                            <button id="prevQuestionBtn" class="secondary-button" type="button">Previous</button>
+                            <button id="homeFromQuizBtn" class="ghost-button" type="button">Home</button>
+                            <button id="nextQuestionBtn" class="primary-button" type="button">Next</button>
+                        </div>
+                    </article>
+
+                    <aside class="glass-card palette-card">
+                        <div class="palette-header">
+                            <h3>Question Palette</h3>
+                            <p>Jump to any question</p>
+                        </div>
+                        <div id="quizPalette" class="palette-grid"></div>
+                    </aside>
+                </div>
+
+                <div class="submit-row">
+                    <button id="submitQuizBtn" class="accent-button" type="button">Submit Quiz</button>
+                </div>
+            </section>
+
+            <section id="practiceScreen" class="screen">
+                <div class="glass-card screen-header">
+                    <div>
+                        <p class="eyebrow">Practice Mode</p>
+                        <h2>Topic-Wise Practice</h2>
+                    </div>
+                    <button id="backHomeFromPracticeBtn" class="ghost-button" type="button">Home</button>
+                </div>
+
+                <div class="glass-card practice-toolbar">
+                    <div id="topicButtons" class="topic-list"></div>
+                    <div class="practice-meta">
+                        <span id="practiceTopicSummary">Choose a topic to begin.</span>
+                        <span class="question-counter">Serial order</span>
+                    </div>
+                </div>
+
+                <article class="glass-card question-card" id="practiceQuestionCard">
+                    <div class="question-header">
+                        <span id="practiceTopicBadge" class="topic-badge">Practice</span>
+                        <span id="practiceCounter" class="question-counter">0 / 0</span>
+                    </div>
+                    <h3 id="practiceQuestionText">Pick a topic to load practice questions.</h3>
+                    <div id="practiceOptions" class="options-grid"></div>
+                    <div id="practiceFeedback" class="feedback-card hidden"></div>
+                </article>
+
+                <div class="nav-row">
+                    <button id="prevPracticeBtn" class="secondary-button" type="button">Previous</button>
+                    <button id="nextPracticeBtn" class="primary-button" type="button">Next</button>
+                </div>
+            </section>
+
+            <section id="resultScreen" class="screen">
+                <div class="glass-card screen-header">
+                    <div>
+                        <p class="eyebrow">Performance Dashboard</p>
+                        <h2>Your Result Summary</h2>
+                    </div>
+                    <div class="header-actions">
+                        <button id="retryWrongBtn" class="secondary-button" type="button">Retry Wrong Questions</button>
+                        <button id="backHomeFromResultBtn" class="ghost-button" type="button">Home</button>
+                    </div>
+                </div>
+
+                <div class="dashboard-grid">
+                    <article class="glass-card stat-panel">
+                        <span>Score</span>
+                        <strong id="scoreValue">0/60</strong>
+                        <p id="scoreCaption">No quiz submitted yet.</p>
+                    </article>
+                    <article class="glass-card stat-panel">
+                        <span>Accuracy</span>
+                        <strong id="accuracyValue">0%</strong>
+                        <p>Based on your latest completed quiz.</p>
+                    </article>
+                    <article class="glass-card stat-panel">
+                        <span>Best Score</span>
+                        <strong id="bestScoreValue">0/60</strong>
+                        <p>Highest score stored in your browser.</p>
+                    </article>
+                </div>
+
+                <div class="glass-card analysis-card">
+                    <div class="analysis-header">
+                        <h3>Topic Performance</h3>
+                        <span id="weakTopicLabel">Weak topics will appear here.</span>
+                    </div>
+                    <div id="topicAnalysis" class="analysis-list"></div>
+                </div>
+
+                <div class="glass-card history-card">
+                    <div class="analysis-header">
+                        <h3>Saved Attempts</h3>
+                        <span>Stored with localStorage</span>
+                    </div>
+                    <div id="historyList" class="history-list"></div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="questions.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
